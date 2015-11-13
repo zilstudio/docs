@@ -1,0 +1,47 @@
+\usepackage{scrextend}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{float}
+\usepackage[pdftex]{graphicx}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[texcoord=true]{eso-pic}
+\usepackage{blindtext}
+
+\usepackage[%
+automark,
+headsepline,                %% Separation line below the header
+%  footsepline,               %% Separation line above the footer
+%markuppercase
+]{scrpage2}
+
+
+
+
+%\topmargin 0.5cm
+%\leftmargin -1cm
+%\textwidth 15cm
+\textheight 21.5cm
+
+\parindent 0.4in
+%\parskip 0.7em
+
+\AddToShipoutPictureBG{%
+	\put(20,-120){\\
+		\includegraphics[height=3cm]{zil_logo_color}\\
+		%\color{lgray}\rule{\paperwidth}{7cm}
+	}%
+}
+
+\lohead{
+	%\includegraphics[width=1cm]{zil_logo_color}
+	\hfill Экспериментальная студия аудио-видео технологий 
+	\hfill \pagemark
+}    %% Top left on odd pages
+\rohead{}
+\chead{}  
+\cfoot{}
+
+\automark[subsection]{section}
+\pagestyle{scrheadings}

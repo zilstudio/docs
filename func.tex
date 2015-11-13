@@ -1,0 +1,24 @@
+\usepackage{mdframed}
+\newcommand{\pdobj}[1]{
+	\fbox{\texttt{#1}}
+}
+
+
+\mdfsetup{
+	middlelinecolor	=red,
+	middlelinewidth=2pt,
+	backgroundcolor=gray!10,
+	leftmargin=1cm,
+	roundcorner=10pt,
+	rightmargin=1cm
+}
+
+\newcommand{\hometask}[1]{
+	\begin{mdframed}
+		{\textbf{Задание:}} \hspace{0.5cm} #1
+	\end{mdframed}
+}
+
+\newcommand{\synth}{\texttt{synth1\~{}.pd\ }}
+
+\newcommand{\synthhelp}{\texttt{synth1\~{}-help.pd\ }}

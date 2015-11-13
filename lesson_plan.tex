@@ -1,76 +1,7 @@
 \documentclass[12pt]{article}
-\usepackage{scrextend}
-\usepackage[T2A]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[english,russian]{babel}
-\usepackage{float}
-\usepackage[pdftex]{graphicx}
-\usepackage{microtype}
-\usepackage{xcolor}
-\usepackage{mdframed}
-\usepackage[texcoord=true]{eso-pic}
+\input{style}
+\input{func}
 
-\usepackage[%
-	automark,
-	headsepline,                %% Separation line below the header
-	%  footsepline,               %% Separation line above the footer
-	%markuppercase
-]{scrpage2}
-
-%\topmargin 0.5cm
-%\leftmargin -1cm
-%\textwidth 15cm
-\textheight 21.5cm
-
-\parindent 0.4in
-%\parskip 0.7em
-
-
-%Экспериментальная студия аудио-видео технологий
-
-\usepackage{blindtext}
-
-\AddToShipoutPictureBG{%
-	\put(20,-120){\\
-		\includegraphics[height=3cm]{zil_logo_color}\\
-		%\color{lgray}\rule{\paperwidth}{7cm}
-	}%
-}
-
-\lohead{
-	%\includegraphics[width=1cm]{zil_logo_color}
-	\hfill Экспериментальная студия аудио-видео технологий 
-	\hfill \pagemark
-	}    %% Top left on odd pages
-\rohead{}
-\chead{}  
-\cfoot{}
-
-\automark[subsection]{section}
-\pagestyle{scrheadings}
-
-\newcommand{\pdobj}[1]{
-	\fbox{\texttt{#1}}
-}
-
-\mdfsetup{
-	middlelinecolor	=red,
-	middlelinewidth=2pt,
-	backgroundcolor=gray!10,
-	leftmargin=1cm,
-	roundcorner=10pt,
-	rightmargin=1cm
-	}
-
-\newcommand{\hometask}[1]{
-	\begin{mdframed}
-		{\textbf{Задание:}} \hspace{0.5cm} #1
-	\end{mdframed}
-}
-
-\newcommand{\synth}{\texttt{synth1\~{}.pd}}
-
-\newcommand{\synthhelp}{\texttt{synth1\~{}-help.pd}}
 
 \begin{document}
 	
@@ -79,59 +10,11 @@
 \noindent
 {\huge Программа занятий}
 
-\section{Вводное занятие}
-
-\begin{enumerate}
-	\item Установка PureData на компьютеры участников
-	\item Обзор и знакомство с возможностями программы
-	\item Подключение к микшерному пульту
-	\item проверка звука \texttt{testtone.pd}
-	\item <<Hello, world!>> и первые звуки
-	\item звуковой оркестр и коллективная импровизация 
-	\item объекты \pdobj{osc\~}, \pdobj{dac\~}, \pdobj{*\~}, \pdobj{hsl}, \pdobj{vsl}.
-\end{enumerate}
-
-\hometask{создание звукового интервала, аккорда. октава, квинта, трезвучие. }
+\input{lsn1}
 
 \section{Постройка синтезатора}
-
-\subsection{Первый монофонический синтезатор}
-\begin{enumerate}
-	\item инлеты -- аутлеты
-	\item оформляем синтезатор для дальнейшего использования в виде патча \synth
-	\item использование справки по объектам Pd.
-	\item создание справки помощи \synthhelp
-	\item комментирование патча для будущего использования
-	\item объекты \pdobj{osc\~}, \pdobj{comment}, \pdobj{inlet}, \pdobj{inlet\~}, \pdobj{outlet}, \pdobj{outlet\~}.
-\end{enumerate}
-
-\hometask{использование нескольких \synth в одном патче, управление громкостью каждого. }
-
-\subsection{Строим терменвокс}
-
-\subsubsection{Управляемый мышью терменвокс}
-
-\begin{enumerate}
-	\item высота и амплитуда \synth \ управляется мышкой 
-	\item Добавляем тремоло (амплитудная модуляция)
-	\item Добавляем вибрацию (частотная модуляция)
-	\item объекты \pdobj{cursor}, \pdobj{print}, \pdobj{route}, \pdobj{+\~}, \pdobj{+}, \pdobj{nbx}, \pdobj{msg}
-\end{enumerate}
-
-\hometask{сделать терменвокс, где параметр курсора \textbf{x} влияет на амплитуду, а \textbf{y} частоту. }
-
-\hometask{сделать терменвокс, где параметр курсора \textbf{x} влияет на частоту, а \textbf{y} амплитуду вибрации. }
-
-%\hometask{многоголосный синтезатор}
-
-\subsubsection{Графический интерфейс к терменвоксу}
-\begin{enumerate}
-	\item использование сабпатчей. изменение цвета фона. обзор GUI элементов.
-	\item объекты \pdobj{pd} \pdobj{cnv}, \pdobj{grid}, \pdobj{key}, \pdobj{keyup}, \pdobj{keyname} и все графические элементы
-	\item добавляем индикаторы уровня сигнала
-\end{enumerate}
-
-\hometask{использовать все графические элементы для управления синтезатором}
+\input{lsn2}
+\input{lsn3}
 
 \subsection{интерфейс MIDI}
 \begin{enumerate}
