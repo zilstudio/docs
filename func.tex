@@ -1,10 +1,10 @@
 \usepackage{mdframed}
 \usepackage{xcolor}
 
-\setlength{\fboxsep}{3pt}
-\setlength{\fboxrule}{0.7pt}
 \newcommand{\pdobj}[1]{
-	\fcolorbox{black}{black!5}{\texttt{#1}}
+	\setlength{\fboxsep}{0.1pt}
+	\setlength{\fboxrule}{0.7pt}
+	\fcolorbox{black}{black!5}{\hspace{3pt}\strut\texttt{#1}\hspace{3pt}}
 }
 
 
