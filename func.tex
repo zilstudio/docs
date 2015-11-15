@@ -1,6 +1,10 @@
 \usepackage{mdframed}
+\usepackage{xcolor}
+
+\setlength{\fboxsep}{3pt}
+\setlength{\fboxrule}{0.7pt}
 \newcommand{\pdobj}[1]{
-	\fbox{\texttt{#1}}
+	\fcolorbox{black}{black!5}{\texttt{#1}}
 }
 
 
