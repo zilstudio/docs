@@ -147,6 +147,9 @@ class LaTeXExtension(markdown.Extension):
         unescape_html_pp = UnescapeHtmlTextPostProcessor()
 
         md.inlinePatterns.add('pdpattern', PdPattern(), '_begin')
+        md.inlinePatterns.add('hometask', HomeTaskPattern(), '_begin')
+        md.inlinePatterns.add('synth', SynthPattern(), '_begin')
+        md.inlinePatterns.add('synth-help', SynthHelpPattern(), '_begin')
 
         md.treeprocessors['latex'] = latex_tp
         md.postprocessors['unescape_html'] = unescape_html_pp
@@ -161,30 +164,40 @@ class LaTeXExtension(markdown.Extension):
 
 
 class PdPattern(SimpleTagPattern):
-    """
-    Matches a pd tag : [PD osc~]
-    """
+    """ Matches a pd tag : [PD osc~] """
     def __init__(self):
         SimpleTagPattern.__init__(self, r'\[PD ([^\]]+)\]', 'pd')
 
     def handleMatch(self, m):
         el = markdown.util.etree.Element(self.tag)
-        code = m.group(2)
-        el.attrib['code'] = code
-
-
-        # (dirs, png) = self.getFnFromCode(code)
-
-        # el.attrib['src'] = png
-        # el.attrib['alt'] = code
-        #
-        # if not os.path.exists(dirs):
-        #     os.makedirs(dirs)
-        #
-        # if not os.path.exists(png):
-        #     self.draw_object(code)
-
+        el.attrib['code'] = m.group(2)
         return el
+
+class HomeTaskPattern(SimpleTagPattern):
+    """ Matches a pd tag : @HOME task """
+    def __init__(self):
+        SimpleTagPattern.__init__(self, r'@HOME{([^}]+)}', 'hometask')
+
+    def handleMatch(self, m):
+        el = markdown.util.etree.Element(self.tag)
+        el.text = m.group(2)
+        return el
+
+class SynthPattern(SimpleTagPattern):
+    """ Matches a pd tag : @SYNTH """
+    def __init__(self):
+        SimpleTagPattern.__init__(self, r'@SYNTH[^-A-Z]', 'synth')
+
+    def handleMatch(self, m):
+        return markdown.util.etree.Element(self.tag)
+
+class SynthHelpPattern(SimpleTagPattern):
+    """ Matches a pd tag : @SYNTH-HELP """
+    def __init__(self):
+        SimpleTagPattern.__init__(self, r'@SYNTH-HELP', 'synth-help')
+
+    def handleMatch(self, m):
+        return markdown.util.etree.Element(self.tag)
 
 class LaTeXTreeProcessor(markdown.treeprocessors.Treeprocessor):
     def run(self, doc):
@@ -262,6 +275,12 @@ class LaTeXTreeProcessor(markdown.treeprocessors.Treeprocessor):
             buffer += "\\pdobj{%s}" % ournode.attrib['code'].replace('~', '\~')
         elif ournode.tag == 'q':
             buffer += "`%s'" % subcontent.strip()
+        elif ournode.tag == 'hometask':
+            buffer += "\\hometask{%s}" % subcontent.strip()
+        elif ournode.tag == 'synth':
+            buffer += "\\synth "
+        elif ournode.tag == 'synth-help':
+            buffer += "\\synthhelp "
         elif ournode.tag == 'p':
             buffer += '\n%s\n' % subcontent.strip()
         # Footnote processor inserts all of the footnote in a sup tag
