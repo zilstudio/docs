@@ -15,6 +15,9 @@ all: $(PDFS)
 	$(TEX) $<
 	rm *.aux *.log
 
+upload: all
+	scp $(PDFS) webmaster@poltavski.ru:/home/webmaster/www/poltavski.ru/zil/docs 
+
 .PHONY: clean
 
 clean:
